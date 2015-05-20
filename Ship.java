@@ -83,5 +83,21 @@ public class Ship
       ships[xspot1 + 3][yspot1].becomeShip();
       
    }
-
+  public void battleship()
+   {
+      int yspot1;
+      int xspot1;
+      do{
+         xspot1 = (int)(Math.random() * 10.0);
+         yspot1 = (int)(Math.random() * 10.0);
+         while(yspot1 >= 6)
+            yspot1 -= 1;
+         
+      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1][yspot1 + 1].isShip == true || temp[xspot1][yspot1 + 2].isShip == true || temp[xspot1][yspot1 + 3].isShip == true || temp[xspot1][yspot1 + 4].isShip == true);
+      ships[xspot1][yspot1].becomeShip();
+      ships[xspot1][yspot1 + 1].becomeShip();
+      ships[xspot1][yspot1 + 2].becomeShip();
+      ships[xspot1][yspot1 + 3].becomeShip();
+      ships[xspot1][yspot1 + 4].becomeShip();
+   }
 }
