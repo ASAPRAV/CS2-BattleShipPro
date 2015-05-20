@@ -13,7 +13,7 @@ public class spot{
    
    public void guessed()
    {
-      guessed = true;
+      isGuessed = true;
    }
    
    public boolean getShipStatus()
