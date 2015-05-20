@@ -1,7 +1,7 @@
 public class spot{
    private boolean isShip;
    private boolean isGuessed;
-   public class spot{
+   public spot(){
       isShip = false;
       isGuessed = false;
    }
