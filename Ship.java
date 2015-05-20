@@ -51,5 +51,21 @@ public class Ship
       ships[xspot1 + 1][yspot1].becomeShip();
       
    }
-   
+   public void frigate()
+   {
+      int yspot1;
+      int xspot1;
+      do{
+         xspot1 = (int)(Math.random() * 10.0);
+         yspot1 = (int)(Math.random() * 10.0);
+         while(yspot1 >= 8)
+            yspot1 -= 1;
+         
+      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1][yspot1 + 1].isShip == true || temp[xspot1][yspot1 + 2].isShip == true);
+      ships[xspot1][yspot1].becomeShip();
+      ships[xspot1][yspot1 + 1].becomeShip();
+      ships[xspot1][yspot1 + 2].becomeShip();
+   }
+
+
 }
