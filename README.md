@@ -10,9 +10,9 @@ everyone who enjoys cheesy games
 An attempt to mimic the classic battleship game, with randomization of ships and realistic graphics, sound effects, and object-oriented programming. Networking to come soon!
 
 ## Distribtuion of Work
-+Jayram - Logic and objects 
-+Josh - programming behind graphics and sound effects 
-+Bronson - graphics 
++Jayram - Logic and objects
++Josh - programming behind graphics and sound effects
++Bronson - graphics
 +Alex - networking 
 
 
