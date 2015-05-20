@@ -66,6 +66,22 @@ public class Ship
       ships[xspot1][yspot1 + 1].becomeShip();
       ships[xspot1][yspot1 + 2].becomeShip();
    }
-
+  public void cruiser()
+   {
+      int yspot1;
+      int xspot1;
+      do{
+         xspot1 = (int)(Math.random() * 10.0);
+         yspot1 = (int)(Math.random() * 10.0);
+         while(xspot1 >= 7)
+            xspot1 -= 1;
+         
+      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1 + 1][yspot1].isShip == true || temp[xspot1 + 2][yspot1].isShip == true || temp[xspot1 + 3][yspot1].isShip == true);
+      ships[xspot1][yspot1].becomeShip();
+      ships[xspot1 + 1][yspot1].becomeShip();
+      ships[xspot1 + 2][yspot1].becomeShip();
+      ships[xspot1 + 3][yspot1].becomeShip();
+      
+   }
 
 }
