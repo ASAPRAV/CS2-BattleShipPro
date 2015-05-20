@@ -36,4 +36,20 @@ public class Ship
          }
       } 
    }
+   public void minesweeper()
+   {
+      int yspot1;
+      int xspot1;
+      do{
+         xspot1 = (int)(Math.random() * 10.0);
+         yspot1 = (int)(Math.random() * 10.0);
+         if(xspot1 >= 9)
+            xspot1 -= 1;
+         
+      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1 + 1][yspot1].isShip == true);
+      ships[xspot1][yspot1].becomeShip();
+      ships[xspot1 + 1][yspot1].becomeShip();
+      
+   }
+   
 }
