@@ -1,7 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Scanner
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Leaderboard{
@@ -53,6 +53,8 @@ public void writeScores(String Score){
         bw.close();
 
       }
+    }catch(Exception e){
+      e.printStackTrace();
     }
 }
 }
