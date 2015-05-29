@@ -18,7 +18,7 @@ public class spot{
       isGuessed = true;
    }
    
-   public boolean getShipStatus()
+   public boolean isShip()
    {
       return isShip;
    }
