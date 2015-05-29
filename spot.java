@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class spot{
    private boolean isShip;
    private boolean isGuessed;
@@ -24,5 +26,15 @@ public class spot{
    public boolean getGuess()
    {
       return isGuessed;
+   }
+   
+   public Color getColor()
+   {
+      if(isGuessed && isShip)
+         return Color.red;
+      else if(isGuessed && !(isShip))
+         return Color.black;
+      else
+         return Color.blue;
    }
 }
