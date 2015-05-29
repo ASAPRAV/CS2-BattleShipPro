@@ -4,6 +4,7 @@ public class Ship
    public spot[][] temp;
    public spot[][] ships;
    public boolean sunk;
+   
    public Ship(int len, spot[][] spaces)
    {
       sunk = false;
@@ -29,13 +30,14 @@ public class Ship
       {
          for(int c = 0; c < 10; c++)
          {
-            if(ships[r][c].isShip)
+            if(ships[r][c].isShip())
             {
-               spaces[r][c].becomeShip();
+               spaces[r][c].makeShip();
             }
          }
       } 
    }
+   
    public void minesweeper()
    {
       int yspot1;
@@ -46,11 +48,12 @@ public class Ship
          if(xspot1 >= 9)
             xspot1 -= 1;
          
-      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1 + 1][yspot1].isShip == true);
-      ships[xspot1][yspot1].becomeShip();
-      ships[xspot1 + 1][yspot1].becomeShip();
+      }while(temp[xspot1][yspot1].isShip() == true || temp[xspot1 + 1][yspot1].isShip() == true);
+      ships[xspot1][yspot1].makeShip();
+      ships[xspot1 + 1][yspot1].makeShip();
       
    }
+   
    public void frigate()
    {
       int yspot1;
@@ -61,11 +64,12 @@ public class Ship
          while(yspot1 >= 8)
             yspot1 -= 1;
          
-      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1][yspot1 + 1].isShip == true || temp[xspot1][yspot1 + 2].isShip == true);
-      ships[xspot1][yspot1].becomeShip();
-      ships[xspot1][yspot1 + 1].becomeShip();
-      ships[xspot1][yspot1 + 2].becomeShip();
+      }while(temp[xspot1][yspot1].isShip() == true || temp[xspot1][yspot1 + 1].isShip() == true || temp[xspot1][yspot1 + 2].isShip() == true);
+      ships[xspot1][yspot1].makeShip();
+      ships[xspot1][yspot1 + 1].makeShip();
+      ships[xspot1][yspot1 + 2].makeShip();
    }
+   
   public void cruiser()
    {
       int yspot1;
@@ -76,13 +80,14 @@ public class Ship
          while(xspot1 >= 7)
             xspot1 -= 1;
          
-      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1 + 1][yspot1].isShip == true || temp[xspot1 + 2][yspot1].isShip == true || temp[xspot1 + 3][yspot1].isShip == true);
-      ships[xspot1][yspot1].becomeShip();
-      ships[xspot1 + 1][yspot1].becomeShip();
-      ships[xspot1 + 2][yspot1].becomeShip();
-      ships[xspot1 + 3][yspot1].becomeShip();
+      }while(temp[xspot1][yspot1].isShip() == true || temp[xspot1 + 1][yspot1].isShip() == true || temp[xspot1 + 2][yspot1].isShip() == true || temp[xspot1 + 3][yspot1].isShip() == true);
+      ships[xspot1][yspot1].makeShip();
+      ships[xspot1 + 1][yspot1].makeShip();
+      ships[xspot1 + 2][yspot1].makeShip();
+      ships[xspot1 + 3][yspot1].makeShip();
       
    }
+   
   public void battleship()
    {
       int yspot1;
@@ -93,11 +98,11 @@ public class Ship
          while(yspot1 >= 6)
             yspot1 -= 1;
          
-      }while(temp[xspot1][yspot1].isShip == true || temp[xspot1][yspot1 + 1].isShip == true || temp[xspot1][yspot1 + 2].isShip == true || temp[xspot1][yspot1 + 3].isShip == true || temp[xspot1][yspot1 + 4].isShip == true);
-      ships[xspot1][yspot1].becomeShip();
-      ships[xspot1][yspot1 + 1].becomeShip();
-      ships[xspot1][yspot1 + 2].becomeShip();
-      ships[xspot1][yspot1 + 3].becomeShip();
-      ships[xspot1][yspot1 + 4].becomeShip();
+      }while(temp[xspot1][yspot1].isShip() == true || temp[xspot1][yspot1 + 1].isShip() == true || temp[xspot1][yspot1 + 2].isShip() == true || temp[xspot1][yspot1 + 3].isShip() == true || temp[xspot1][yspot1 + 4].isShip() == true);
+      ships[xspot1][yspot1].makeShip();
+      ships[xspot1][yspot1 + 1].makeShip();
+      ships[xspot1][yspot1 + 2].makeShip();
+      ships[xspot1][yspot1 + 3].makeShip();
+      ships[xspot1][yspot1 + 4].makeShip();
    }
 }
