@@ -14,8 +14,8 @@ public class player
    private static void makeShips()
    {
       //Josh: TO DO:
-      //feature each ship & then have them place it
-      //once they place it, make sure to alter those spots to have a ship present
+      //feature each ship & then have them place it on the board
+      //once they place it, make sure to alter those spots on the 2D array
    }
    
    private static void initSpots()
@@ -30,15 +30,16 @@ public class player
       }
    }
    
-   private static void play()
+   public static void play()
    {
       //TO DO:
       //find spot to click on
       //launch at that spot
       //reveal what's underneath (ship/water)
+      checkWin();
    }
    
-   private static boolean checkWin()
+   public static boolean checkWin()
    {
       //TO DO:
       //see if all the ships are sunk
