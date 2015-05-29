@@ -11,7 +11,7 @@ public class Leaderboard{
   private Scanner in;
 
 public Leaderboard(){
-
+//Creates the Leaderboard text file
   try{
     f = new File("./leaderboard.txt");
     if(!f.exists())
@@ -26,6 +26,7 @@ public Leaderboard(){
       e.printStackTrace();
     }
   }
+  //parses throgh the file and returns an arraylist of each line
   public ArrayList<String> readLeaderboard(){
     ArrayList<String> scores = new ArrayList<String>();
     try{
@@ -39,7 +40,7 @@ public Leaderboard(){
     return scores;
   }
 
-
+// writes a single score to the end of the leaderboard text file
 public void writeScores(String Score){
     try{
       f = new File("./leaderboard.txt");
