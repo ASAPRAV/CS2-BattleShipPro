@@ -11,6 +11,7 @@ public class game extends Applet implements MouseListener
    private static player player1;
    private static player player2;
    private static String screen;
+   private static player currentPlayer;
    
    public void init()
    {
@@ -46,7 +47,7 @@ public class game extends Applet implements MouseListener
    
    public void paint(Graphics g)
    { 
-      this.setSize(300, 600);
+      this.setSize(400, 600);
       update(g); 
    }
    
@@ -81,7 +82,7 @@ public class game extends Applet implements MouseListener
    }
    public void player2SetupScreen()
    {
-   
+      
    }
    public void player1Screen()
    {
@@ -90,6 +91,10 @@ public class game extends Applet implements MouseListener
    public void player2Screen()
    {
    
+   }
+   public void guess(int x, int y)
+   {
+      
    }
    
    /*
@@ -169,11 +174,21 @@ public class game extends Applet implements MouseListener
       }
       else if(screen.equals("player1"))
       {
-      
+         int xcord;
+         int ycord;
+         xcord = (int)x/25;
+         ycord = (int)y/25;
+         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+            guess(xcord, ycord);
       }
       else if(screen.equals("player2"))
       {
-      
+         int xcord;
+         int ycord;
+         xcord = (int)x/25;
+         ycord = (int)y/25;
+         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+            guess(xcord, ycord);
       }
       /*
       if(x>=50 && x<= 550 && y>=50 && y<=550)
