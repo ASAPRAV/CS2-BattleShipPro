@@ -12,6 +12,12 @@ public class game extends Applet implements MouseListener
    private static player player2;
    private static String screen;
    private static player currentPlayer;
+   private static int xstart;
+   private static int ystart;
+   private static int xend;
+   private static int yend;
+   private static int xcord;
+   private static int ycord;
    
    public void init()
    {
@@ -20,12 +26,18 @@ public class game extends Applet implements MouseListener
       Color p1 = Color.red;
       player2 = new player();
       Color p2 = Color.blue;
-      screen = "start";      
+      screen = "start";  
+      xstart = -1;
+      ystart = -1;
+      xend = -1;
+      yend = -1;
+      xcord = -1;
+      ycord = -1;    
       //adds mouse listener
       addMouseListener(this);
       
       //does backbuffering
-      backbuffer = createImage(getSize().width, getSize().height);
+      backbuffer = createImage(500, 600);
       backg = backbuffer.getGraphics();
    }
    
@@ -47,7 +59,8 @@ public class game extends Applet implements MouseListener
    
    public void paint(Graphics g)
    { 
-      this.setSize(400, 600);
+      this.setSize(500, 600);
+      
       update(g); 
    }
    
@@ -62,7 +75,41 @@ public class game extends Applet implements MouseListener
    }
    public void player1SetupScreen()
    {
-      backg.setColor(Color.darkGray);
+      backg.setColor(Color.red);
+      backg.fillRect(0,0,300,25);
+      backg.fillRect(0,275,300,50);
+      backg.fillRect(0,575,300,25);
+      backg.fillRect(0,0,25,600);
+      backg.fillRect(275,0,25,600);
+      backg.setColor(Color.black);
+      for(int r = 0; r < 9; r++)
+      {
+         backg.drawLine(50 + 25*r, 25, 50 + 25*r, 275);
+         backg.drawLine(50 + 25*r, 325, 50 + 25*r, 575);
+      }
+      for(int c =0; c <9; c++)
+      {
+         backg.drawLine(25, 50 + 25*c, 275, 50 + 25*c);
+         backg.drawLine(25, 350 + 25*c, 275, 350 + 25*c);
+      }
+      backg.setColor(Color.black);
+      if(xstart == -1 && ystart == -1)
+      {
+         backg.drawString("Choose the starting spot for", 305, 340);
+         backg.drawString("your battleship", 305, 350);
+         repaint();
+      }
+      else
+      {
+         backg.drawString("Choose the ending spot for", 305, 340);
+         backg.drawString("your battleship", 305, 350);
+         repaint();
+      }
+      
+   }
+   public void player2SetupScreen()
+   {
+      backg.setColor(Color.blue);
       backg.fillRect(0,0,300,25);
       backg.fillRect(0,275,300,50);
       backg.fillRect(0,575,300,25);
@@ -80,10 +127,6 @@ public class game extends Applet implements MouseListener
          backg.drawLine(25, 350 + 25*c, 275, 350 + 25*c);
       }
    }
-   public void player2SetupScreen()
-   {
-      
-   }
    public void player1Screen()
    {
    
@@ -97,60 +140,6 @@ public class game extends Applet implements MouseListener
       
    }
    
-   /*
-   public void drawSite()
-   {
-      //draws the grid
-      //traverses through the 2D array
-      for(int i = 0; i<ground.length; i++)
-      {
-         for(int j = 0; j<ground[i].length; j++)
-         {
-            backg.setColor(ground[i][j].getColor());//sets color
-            backg.fillRect(50+(i*100),50+(j*100),95,95);//fills the spot
-            backg.setColor(Color.black);
-         }
-      }
-      backg.setColor(Color.gray);//covers old statement if any
-      backg.fillRect(30, 545, 400, 200);
-      repaint();
-   }
-   
-   public void dig(int row, int col)
-   {
-      //preform the dig
-      ground[row][col].dig();
-      
-      checkWin(row, col);
-   }
-   
-   public void checkWin(int row, int col)
-   {
-      if(ground[row][col].isShip())//if the spot is a bone
-      {
-         int k = 0;//create a temp variable
-         //traverse through the ground 2D array
-         for(int r = 0; r<ground.length; r++)
-         {
-            for(int c = 0; c<ground[0].length; c++)
-            {
-               if(ground[r][c].isBone == true && ground[r][c].dugUp == true)
-               {
-                  k++;//add to k each time there is a dug up bone
-               }
-            }
-         }
-         if(k>=5)//if all five bones are found
-         {
-            backg.setColor(Color.black);
-            backg.fillRect(0,0,600,600);
-            backg.setColor(Color.white);
-            backg.drawString("All the fossils were found. You win!", 30, 30);
-            repaint();
-         }
-      }
-   }
-   */
    public void mouseClicked(MouseEvent e)
    {
       //get mouse coordinates
@@ -167,6 +156,13 @@ public class game extends Applet implements MouseListener
       else if(screen.equals("player1Setup"))
       {
          
+         xcord = (int)x/25;
+         ycord = (int)(y-300)/25;
+         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+         {
+            xstart = xcord -1;
+            ystart = ycord -1;
+         }
       }
       else if(screen.equals("player2Setup"))
       {
@@ -174,8 +170,7 @@ public class game extends Applet implements MouseListener
       }
       else if(screen.equals("player1"))
       {
-         int xcord;
-         int ycord;
+         
          xcord = (int)x/25;
          ycord = (int)y/25;
          if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
@@ -183,26 +178,12 @@ public class game extends Applet implements MouseListener
       }
       else if(screen.equals("player2"))
       {
-         int xcord;
-         int ycord;
+         
          xcord = (int)x/25;
          ycord = (int)y/25;
-         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
-            guess(xcord, ycord);
+         //if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+         //   guess(xcord, ycord);
       }
-      /*
-      if(x>=50 && x<= 550 && y>=50 && y<=550)
-      {
-         //modify it
-         int xBox = (x-50)/100;
-         int yBox = (y-50)/100;
-         //check if its within a valid box
-         if(xBox>=0 && xBox<=5 && yBox>=0 && yBox<=5)
-         {
-            dig(xBox, yBox);//call dig upon that spot
-         }
-      }
-      */
    }
    
    public void mouseEntered(MouseEvent e)
