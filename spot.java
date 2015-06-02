@@ -1,9 +1,12 @@
 import java.awt.*;
 
 public class spot{
+   
    private boolean isShip;
    private boolean isGuessed;
-   public spot(){
+   
+   public spot()
+   {
       isShip = false;
       isGuessed = false;
    }
