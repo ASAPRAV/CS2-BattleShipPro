@@ -12,11 +12,11 @@ public class game extends Applet implements MouseListener
    private static player player2;
    private static String screen;
    private static player currentPlayer;
-   private static int xstart;
+   private static int xstart;//gets passed to the ship class
    private static int ystart;
-   private static int xend;
+   private static int xend;//gets passed to the ship class
    private static int yend;
-   private static int xcord;
+   private static int xcord;//used by the mouseListener
    private static int ycord;
    
    public void init()
@@ -72,6 +72,8 @@ public class game extends Applet implements MouseListener
       backg.fillRoundRect(100, 275, 100, 50, 10, 5);
       backg.setColor(Color.black);
       backg.drawString("START",130, 305);
+      backg.setColor(Color.lightGray);
+      backg.fillRect(300,0,200,600);
    }
    public void player1SetupScreen()
    {
@@ -97,14 +99,26 @@ public class game extends Applet implements MouseListener
       {
          backg.drawString("Choose the starting spot for", 305, 340);
          backg.drawString("your battleship", 305, 350);
+         
+         repaint();
+      }
+      else if(xend == -1 && yend == -1)
+      {
+         backg.setColor(Color.lightGray);
+         backg.fillRect(300,275,200,200);
+         backg.setColor(Color.gray);
+         backg.fillRect(25*xcord-25, 25*ycord +275, 25, 25);
+         backg.setColor(Color.black);
+         backg.drawString("Choose the ending spot for", 305, 340);
+         backg.drawString("your battleship", 305, 350);
+         backg.setColor(Color.yellow);
          repaint();
       }
       else
       {
-         backg.drawString("Choose the ending spot for", 305, 340);
-         backg.drawString("your battleship", 305, 350);
-         repaint();
+         
       }
+      
       
    }
    public void player2SetupScreen()
@@ -153,26 +167,31 @@ public class game extends Applet implements MouseListener
          screen = "player1setup";
          repaint();
       }
-      else if(screen.equals("player1Setup"))
+      else if(screen.equals("player1setup"))
       {
          
-         xcord = (int)x/25;
-         ycord = (int)(y-300)/25;
-         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+         xcord = (int)(x+25)/25;
+         ycord = (int)(y-275)/25;
+         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)//makes sure the selected spot is in the grid
          {
             xstart = xcord -1;
             ystart = ycord -1;
          }
+         else if(xstart != -1 && ystart != -1)//checks if the start points have already been given coordinates
+         {
+            xend = xcord - 1;
+            yend = ycord - 1;
+         }
       }
-      else if(screen.equals("player2Setup"))
+      else if(screen.equals("player2setup"))
       {
       
       }
       else if(screen.equals("player1"))
       {
          
-         xcord = (int)x/25;
-         ycord = (int)y/25;
+         xcord = (int)(x+25)/25;
+         ycord = (int)(y+25)/25;
          if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
             guess(xcord, ycord);
       }
