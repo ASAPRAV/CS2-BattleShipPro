@@ -8,10 +8,7 @@ public class game extends Applet implements MouseListener
 {
    private Image backbuffer;
    private Graphics backg;
-   private static player player1;
-   private static player player2;
    private static String screen;
-   private static player currentPlayer;
    private static int xstart;//gets passed to the ship class
    private static int ystart;
    private static int xend;//gets passed to the ship class
@@ -22,9 +19,7 @@ public class game extends Applet implements MouseListener
    public void init()
    {
       //initializations
-      player1 = new player();
       Color p1 = Color.red;
-      player2 = new player();
       Color p2 = Color.blue;
       screen = "start";  
       xstart = -1;
@@ -118,8 +113,6 @@ public class game extends Applet implements MouseListener
       {
          
       }
-      
-      
    }
    public void player2SetupScreen()
    {
