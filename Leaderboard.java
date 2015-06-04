@@ -7,13 +7,16 @@ public class Leaderboard extends ArrayList<PlayedGame>{
   private static String filename;
 
   public void setFileName(String fileName){
-
+    //Sets filename
     if(fileName == "")
       this.filename = "leaderboard.txt";
     else
       this.filename = fileName;
   }
+
   public boolean add(PlayedGame g){
+    //loops through list of scores, if the score to be added is less than the spot
+    //this keeps the list in order of score
     int i = 0;
     for(PlayedGame game: this){
       if(game.getScore() <= g.getScore()){
@@ -29,10 +32,12 @@ public class Leaderboard extends ArrayList<PlayedGame>{
       }
       return true;
     }
+    //add method incase its not passed a "PlayedGame" class
     public boolean add(String name, int score){
       PlayedGame g = new PlayedGame(name,score);
       return this.add(g);
     }
+    //writes out the arraylist to a file
     public void save(){
       try{
         FileOutputStream fileOut = new FileOutputStream(this.filename);
@@ -43,6 +48,7 @@ public class Leaderboard extends ArrayList<PlayedGame>{
         io.printStackTrace();
       }
     }
+    //loads the arrraylist from a file
     public void load(){
       Leaderboard temp = null;
       try{
@@ -58,6 +64,7 @@ public class Leaderboard extends ArrayList<PlayedGame>{
       this.clear();
       this.addAll(temp);
     }
+    //returns the top three scores
     public String getTopThree(){
 		int length = this.size();
 		String result ="";

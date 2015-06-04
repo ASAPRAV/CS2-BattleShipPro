@@ -9,6 +9,7 @@ public class PlayedGame{
   public String toString(){
   return (this.name + " " + this.score);
 }
+//used to compare different objects, based on score or player name
 public boolean equals(Object o){
   PlayedGame g = (PlayedGame) o;
   if(!this.name.equals(g.name))
