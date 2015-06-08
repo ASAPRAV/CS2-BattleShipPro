@@ -1,6 +1,6 @@
 public class Board
 {
-   private static spot[][] board = new spot[10][10];
+   public static spot[][] board = new spot[10][10];
    private static Ship patrolBoat;
    private static Ship destroyer;
    private static Ship destroyer2;
