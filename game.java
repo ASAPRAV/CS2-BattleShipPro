@@ -8,10 +8,14 @@ public class game extends Applet implements MouseListener
 {
    private Image backbuffer;
    private Graphics backg;
+<<<<<<< HEAD
    private static player player1;
    private static player player2;
    private static String screen;
    private static player currentPlayer;
+=======
+   private static String screen;
+>>>>>>> master
    private static int xstart;//gets passed to the ship class
    private static int ystart;
    private static int xend;//gets passed to the ship class
@@ -22,9 +26,7 @@ public class game extends Applet implements MouseListener
    public void init()
    {
       //initializations
-      player1 = new player();
       Color p1 = Color.red;
-      player2 = new player();
       Color p2 = Color.blue;
       screen = "start";  
       xstart = -1;
@@ -74,6 +76,12 @@ public class game extends Applet implements MouseListener
       backg.drawString("START",130, 305);
       backg.setColor(Color.lightGray);
       backg.fillRect(300,0,200,600);
+<<<<<<< HEAD
+   }
+   public void player1SetupScreen()
+   {
+      backg.setColor(Color.red);
+=======
    }
    public void player1SetupScreen()
    {
@@ -94,6 +102,52 @@ public class game extends Applet implements MouseListener
          backg.drawLine(25, 50 + 25*c, 275, 50 + 25*c);
          backg.drawLine(25, 350 + 25*c, 275, 350 + 25*c);
       }
+      backg.setColor(Color.black);
+      if(xstart == -1 && ystart == -1)
+      {
+         backg.drawString("Choose the starting spot for", 305, 340);
+         backg.drawString("your battleship", 305, 350);
+         
+         repaint();
+      }
+      else if(xend == -1 && yend == -1)
+      {
+         backg.setColor(Color.lightGray);
+         backg.fillRect(300,275,200,200);
+         backg.setColor(Color.gray);
+         backg.fillRect(25*xcord-25, 25*ycord +275, 25, 25);
+         backg.setColor(Color.black);
+         backg.drawString("Choose the ending spot for", 305, 340);
+         backg.drawString("your battleship", 305, 350);
+         backg.setColor(Color.yellow);
+         repaint();
+      }
+      else
+      {
+         
+      }
+   }
+   public void player2SetupScreen()
+   {
+      backg.setColor(Color.blue);
+>>>>>>> master
+      backg.fillRect(0,0,300,25);
+      backg.fillRect(0,275,300,50);
+      backg.fillRect(0,575,300,25);
+      backg.fillRect(0,0,25,600);
+      backg.fillRect(275,0,25,600);
+      backg.setColor(Color.black);
+      for(int r = 0; r < 9; r++)
+      {
+         backg.drawLine(50 + 25*r, 25, 50 + 25*r, 275);
+         backg.drawLine(50 + 25*r, 325, 50 + 25*r, 575);
+      }
+      for(int c =0; c <9; c++)
+      {
+         backg.drawLine(25, 50 + 25*c, 275, 50 + 25*c);
+         backg.drawLine(25, 350 + 25*c, 275, 350 + 25*c);
+      }
+<<<<<<< HEAD
       backg.setColor(Color.black);
       if(xstart == -1 && ystart == -1)
       {
@@ -147,6 +201,15 @@ public class game extends Applet implements MouseListener
    }
    public void player2Screen()
    {
+=======
+   }
+   public void player1Screen()
+   {
+   
+   }
+   public void player2Screen()
+   {
+>>>>>>> master
    
    }
    public void guess(int x, int y)

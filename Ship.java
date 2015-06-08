@@ -2,6 +2,7 @@ public class Ship
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
    private int size;
    private boolean sunk;
    public int[][] locs;
@@ -12,21 +13,29 @@ public class Ship
    public static int size;
    public static spot[][] ships;
    private static boolean sunk;
+=======
+   public static spot[][] ships;
+>>>>>>> master
    private static int startX;
    private static int startY;
    private static int endX;
    private static int endY;
    
+<<<<<<< HEAD
    public Ship(int len, int startXe, int startYe, int endXe, int endYe)
 <<<<<<< HEAD
 >>>>>>> master
 =======
+>>>>>>> master
+=======
+   public Ship(int startXe, int startYe, int endXe, int endYe)
 >>>>>>> master
    {
       startX = startXe;
       startY = startYe;
       endX = endXe;
       endY = endYe;
+<<<<<<< HEAD
       
       sunk = false;
 <<<<<<< HEAD
@@ -68,6 +77,23 @@ public class Ship
 <<<<<<< HEAD
 >>>>>>> master
 =======
+>>>>>>> master
+=======
+   }
+      
+   public boolean isSunk()
+   {
+      for(int r = startX; r < endX; r++)
+      {
+         for(int c = startY; c <endY; c++)
+         {
+            if(ships[r][c].isShip() && !ships[r][c].getGuess())
+            {
+               return false;
+            }
+         }
+      }
+      return true;
 >>>>>>> master
    }
 }
