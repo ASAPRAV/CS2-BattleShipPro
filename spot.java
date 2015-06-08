@@ -1,43 +1,37 @@
 import java.awt.*;
 
 public class spot{
-   
-   private boolean isShip;
-   private boolean isGuessed;
+   private int val;
    
    public spot()
    {
-      isShip = false;
-      isGuessed = false;
+      val = 0;
    }
    
    public void makeShip()
    {
-      isShip = true;
+      val = 1;
    }
    
    public void guessed()
    {
-      isGuessed = true;
+      if(val == 0)
+         val = 2;
+      else if(val == 1)
+         val = 3;
    }
    
    public boolean isShip()
    {
-      return isShip;
+      if(val == 1 || val == 3)
+         return true;
+      return false;
    }
    
    public boolean getGuess()
    {
-      return isGuessed;
-   }
-   
-   public Color getColor()
-   {
-      if(isGuessed && isShip)
-         return Color.red;
-      else if(isGuessed && !(isShip))
-         return Color.black;
-      else
-         return Color.blue;
+      if(val == 2 || val == 3)
+         return true;
+      return false;
    }
 }
