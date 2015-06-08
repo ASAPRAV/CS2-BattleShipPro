@@ -1,11 +1,14 @@
 public class Ship
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
    private int size;
    private boolean sunk;
    public int[][] locs;
    public Ship(int len)
 =======
+=======
+>>>>>>> master
    public static int size;
    public static spot[][] ships;
    private static boolean sunk;
@@ -15,6 +18,9 @@ public class Ship
    private static int endY;
    
    public Ship(int len, int startXe, int startYe, int endXe, int endYe)
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
    {
       startX = startXe;
@@ -59,6 +65,9 @@ public class Ship
          }
       }
       return true;
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
    }
 }
