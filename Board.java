@@ -3,8 +3,9 @@ public class Board
    private static spot[][] board = new spot[10][10];
    private static Ship patrolBoat;
    private static Ship destroyer;
+   private static Ship destroyer2;
    private static Ship carrier;
-   private static Ship battleShip;
+   private static Ship battleship;
    
    public Board()
    {
@@ -12,7 +13,7 @@ public class Board
       {
          for(int c = 0; c<10; c++)
          {
-            spot[r][c] = new spot();
+            board[r][c] = new spot();
          }
       }
    }
@@ -22,34 +23,35 @@ public class Board
       {
          for(int c = startY; c<endY; c++)
          {
-            if(spot[r][c].isShip)
+            if(board[r][c].isShip())
                return;
          }
       }
+      
       for(int r = startX; r<endX; r++)
       {
          for(int c = startY; c<endY; c++)
          {
-            spot[r][c].makeShip();
-            if(len = 2)
+            board[r][c].makeShip();
+            if(len == 2)
             {
                patrolBoat = new Ship(startX, startY, endX, endY);
             }
-            if(len = 4)
+            if(len == 4)
             {
                battleship = new Ship(startX, startY, endX, endY);
             }
-            if(len = 5)
+            if(len == 5)
             {
                carrier = new Ship(startX, startY, endX, endY);
             }
-            if(len = 3 && destroyer == null)
+            if(len == 3 && destroyer == null)
             {
                destroyer = new Ship(startX, startY, endX, endY);
             }
-            else if(len = 3)
+            else if(len == 3)
             {
-               destoyer2 = new Ship(startX, startY, endX, endY);
+               destroyer2 = new Ship(startX, startY, endX, endY);
             }
          }
       }
