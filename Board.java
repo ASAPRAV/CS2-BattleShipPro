@@ -28,9 +28,9 @@ public class Board
          }
       }
       
-      for(int r = startX; r<endX; r++)
+      for(int r = startX; r<=endX; r++)
       {
-         for(int c = startY; c<endY; c++)
+         for(int c = startY; c<=endY; c++)
          {
             board[r][c].makeShip();
             if(len == 2)

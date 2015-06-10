@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class game extends Applet implements MouseListener
+public class gameTest extends Applet implements MouseListener
 {
    private Image backbuffer;
    private Graphics backg;
