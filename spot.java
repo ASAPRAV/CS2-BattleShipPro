@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class spot{
-   private int val;
+   public int val;
    
    public spot()
    {

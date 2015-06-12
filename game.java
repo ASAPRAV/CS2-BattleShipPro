@@ -213,27 +213,128 @@ public class game extends Applet implements MouseListener
    }
    public void playerScreen()
    {
-      for(int r = 0; r < 10 r++)
+      backg.setColor(Color.lightGray);
+      backg.fillRect(0,0,500,600);
+      Board other = new Board();
+      if(tempPlayer.equals("player1"))
       {
-         for(int c = 0; c < 10; c++)
+         other = player2;
+      }
+      else
+      {
+         other = player1;
+      }
+      for(int r = 1; r < 11; r++)
+      {
+         for(int c = 1; c < 11; c++)
          {
-            
+            if(currentPlayer.board[r-1][c-1].val == 0)
+            {
+               backg.setColor(Color.cyan);
+               backg.fillRect(r * 25, c * 25 + 300, 25, 25);
+            }
+            if(currentPlayer.board[r-1][c-1].val == 1)
+            {
+               backg.setColor(Color.black);
+               backg.fillRect(r*25, c*25 + 300, 25, 25);
+            }
+            else if(currentPlayer.board[r-1][c-1].val == 2)
+            {
+               backg.setColor(Color.white);
+               backg.fillRect(r * 25, c * 25 + 300, 25, 25);
+            }
+            else if(currentPlayer.board[r-1][c-1].val == 3)
+            {
+               backg.setColor(Color.red);
+               backg.fillRect(r * 25, c * 25 + 300, 25, 25);
+            }
          }
       }
+      for(int r = 1; r < 11; r++)
+      {
+         for(int c = 1; c < 11; c++)
+         {
+            if(other.board[r-1][c-1].val == 0)
+            {
+               backg.setColor(Color.cyan);
+               backg.fillRect(r * 25, c * 25, 25, 25);
+            }
+            if(other.board[r-1][c-1].val == 1)
+            {
+               backg.setColor(Color.black);
+               backg.fillRect(r*25, c*25, 25, 25);
+            }
+            else if(other.board[r-1][c-1].val == 2)
+            {
+               backg.setColor(Color.white);
+               backg.fillRect(r * 25, c * 25, 25, 25);
+            }
+            else if(other.board[r-1][c-1].val == 3)
+            {
+               backg.setColor(Color.red);
+               backg.fillRect(r * 25, c * 25, 25, 25);
+            }
+         }
+      }
+
+      
+      backg.setColor(currentColor);
+      backg.fillRect(0,0,300,25);
+      backg.fillRect(0,275,300,50);
+      backg.fillRect(0,575,300,25);
+      backg.fillRect(0,0,25,600);
+      backg.fillRect(275,0,25,600);
+      backg.setColor(Color.black);
+      for(int r = 0; r < 9; r++)
+      {
+         backg.drawLine(50 + 25*r, 25, 50 + 25*r, 275);
+         backg.drawLine(50 + 25*r, 325, 50 + 25*r, 575);
+      }
+      for(int c =0; c <9; c++)
+      {
+         backg.drawLine(25, 50 + 25*c, 275, 50 + 25*c);
+         backg.drawLine(25, 350 + 25*c, 275, 350 + 25*c);
+      }
+      backg.setColor(Color.lightGray);
+      backg.fillRect(300,0,200, 600);
+      backg.setColor(Color.black);
+      backg.drawString("Ready to move on?" ,305, 340);
+      backg.setColor(Color.green);
+      backg.fillRect(305,360,190,100);
+      repaint();
+
    }
    public void switchPlayer()
    {
       
       if(tempPlayer.equals("player1"))
       {
-         player1 = currentPlayer;
+         for(int r = 0; r < 10; r++)
+         {
+            for(int c = 0; c < 10; c++)
+            {
+               System.out.print(currentPlayer.board[r][c].val);
+            }
+            System.out.println();
+         }
+         player1.board = currentPlayer.board;
+         currentPlayer = new Board();
          currentPlayer = player2;
          currentColor = p2;
          tempPlayer = "player2";
+         for(int r = 0; r < 10; r++)
+         {
+            for(int c = 0; c < 10; c++)
+            {
+               System.out.print(player1.board[r][c].val);
+            }
+            System.out.println();
+         }
       }
       else if(tempPlayer.equals("player2"))
       {
          player2 = currentPlayer;
+         currentPlayer = new Board();
          currentPlayer = player1;
          currentColor = p1;
          tempPlayer = "player1";
@@ -255,7 +356,7 @@ public class game extends Applet implements MouseListener
       }
       else if(setupDone)
       {
-         screen = "playerScreen";
+         screen = "transition";
          transition();
       }
    }
@@ -269,6 +370,26 @@ public class game extends Applet implements MouseListener
    }
    public void guess(int x, int y)
    {
+      Board other = new Board();
+      if(tempPlayer.equals("player1"))
+      {
+         other = player2;
+      }
+      else
+      {
+         other = player1;
+      }
+      other.board[x][y].guessed();
+      if(tempPlayer.equals("player1"))
+      {
+         player2 = other;
+         other = new Board();
+      }
+      else
+      {
+         player1 = other;
+         other = new Board();
+      }
       
    }
    
@@ -363,13 +484,18 @@ public class game extends Applet implements MouseListener
             }
          }
       }
-      else if(screen.equals("player1"))
+      else if(screen.equals("playerScreen"))
       {
          
          xcord = (int)(x+25)/25;
          ycord = (int)(y+25)/25;
          if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
-            guess(xcord, ycord);
+            guess(xcord -1, ycord -1);
+         if(x > 305 && x < 495 && y > 360 && y < 460)
+         {
+            switchPlayer();
+         }
+
       }
    }
    
