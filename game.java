@@ -20,9 +20,6 @@ public class game extends Applet implements MouseListener
    private static int[] shipLengths;
    private int currentLength;
    private int lengthIndex;
-   private Board currentPlayer;
-   private String tempPlayer;
-   private Color currentColor;
    private Color p1;
    private Color p2;
    private boolean setupDone;
@@ -132,7 +129,7 @@ public class game extends Applet implements MouseListener
             backg.setColor(Color.lightGray);
             backg.fillRect(300,275,200,200);
             backg.setColor(Color.gray);
-            backg.fillRect(25*(xstart+1)-25, 25*(ystart+1) +275, 25, 25);
+            backg.fillRect(25*(xstart+2)-25, 25*(ystart+2) +275, 25, 25);
             backg.setColor(Color.black);
             backg.drawString("Player :" + tempPlayer,305,330);
             backg.drawString("Choose the ending spot for", 305, 340);
@@ -140,23 +137,24 @@ public class game extends Applet implements MouseListener
          }
          if(xend != -1)
          {
+            System.out.println(" " + xstart + " " + ystart); 
             currentPlayer.makeShip(currentLength, xstart, ystart, xend, yend);
             backg.setColor(Color.gray);
-            backg.fillRect(25*(xend+1)-25, 25*(yend+1) +275, 25, 25);
+            backg.fillRect(25*(xend+2)-25, 25*(yend+2) +275, 25, 25);
             if(xend == xstart)
             {
                if(ystart < yend)
                {
                   for(int j = 0; j < currentLength -1; j++)
                   {
-                     backg.fillRect(25*(xstart+1)-25, 25*(ystart+1) +275 + (j * 25), 25, 25);
+                     backg.fillRect(25*(xstart+2)-25, 25*(ystart+2) +275 + (j * 25), 25, 25);
                   }
                }
                if(ystart > yend)
                {
                   for(int j = 0; j < currentLength -1; j++)
                   {
-                     backg.fillRect(25*(xstart+1)-25, 25*(ystart+1) +275 - (j * 25), 25, 25);
+                     backg.fillRect(25*(xstart+2)-25, 25*(ystart+2) +275 - (j * 25), 25, 25);
                   }
                }
             }
@@ -166,14 +164,14 @@ public class game extends Applet implements MouseListener
                {
                   for(int j = 0; j < currentLength -1; j++)
                   {
-                     backg.fillRect(25*(xstart+1)-25 + (j * 25), 25*(ystart+1) +275, 25, 25);
+                     backg.fillRect(25*(xstart+2)-25 + (j * 25), 25*(ystart+2) +275, 25, 25);
                   }
                }
                if(xstart > xend)
                {
                   for(int j = 0; j < currentLength -1; j++)
                   {
-                     backg.fillRect(25*(xstart+1)-25 - (j * 25), 25*(ystart+1) +275, 25, 25);
+                     backg.fillRect(25*(xstart+2)-25 - (j * 25), 25*(ystart+2) +275, 25, 25);
                   }
                }
             }
@@ -313,15 +311,12 @@ public class game extends Applet implements MouseListener
          {
             for(int c = 0; c < 10; c++)
             {
-               System.out.print(currentPlayer.board[r][c].val);
+               System.out.print(currentPlayer.board[c][r].val);
+               player1.board[c][r].val = currentPlayer.board[r][c].getVal();
             }
             System.out.println();
          }
-         player1.board = currentPlayer.board;
-         currentPlayer = new Board();
-         currentPlayer = player2;
-         currentColor = p2;
-         tempPlayer = "player2";
+         //player1.board = currentPlayer.board;
          for(int r = 0; r < 10; r++)
          {
             for(int c = 0; c < 10; c++)
@@ -330,6 +325,28 @@ public class game extends Applet implements MouseListener
             }
             System.out.println();
          }
+         currentPlayer = new Board();
+         for(int r = 0; r < 10; r++)
+         {
+            for(int c = 0; c < 10; c++)
+            {
+               currentPlayer.board[r][c].val = 0;
+            }
+            
+         }
+         for(int r = 0; r < 10; r++)
+         {
+            for(int c = 0; c < 10; c++)
+            {
+               System.out.print(player1.board[r][c].val);
+            }
+            System.out.println();
+         }
+         currentPlayer = player2;
+         currentColor = p2;
+         tempPlayer = "player2";
+         System.out.println();
+         
       }
       else if(tempPlayer.equals("player2"))
       {
@@ -397,6 +414,7 @@ public class game extends Applet implements MouseListener
    {
       //get mouse coordinates
       int x = e.getX();
+      System.out.println(x);
       int y = e.getY();
       //make sure its within the bounds
       
@@ -421,9 +439,9 @@ public class game extends Applet implements MouseListener
             switchPlayer();
          }
          else{
-            xcord = (int)(x+25)/25;
-            ycord = (int)(y-275)/25;
-            if((xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12) && xstart == -1)//makes sure the selected spot is in the grid
+            xcord = (int)(x+25)/25 - 1;
+            ycord = (int)(y-275)/25 - 1 ;
+            if((xcord > 0 && xcord < 11 && ycord > 0 && ycord < 11) && xstart == -1)//makes sure the selected spot is in the grid
             {
                xstart = xcord -1;
                ystart = ycord -1;

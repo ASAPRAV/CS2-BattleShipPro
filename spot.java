@@ -34,4 +34,8 @@ public class spot{
          return true;
       return false;
    }
+   public int getVal()
+   {
+      return val;
+   }
 }

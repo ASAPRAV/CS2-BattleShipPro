@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class gameTest extends Applet implements MouseListener
+public class gameTest2 extends Applet implements MouseListener
 {
    private Image backbuffer;
    private Graphics backg;
@@ -15,8 +15,8 @@ public class gameTest extends Applet implements MouseListener
    private static int yend;
    private static int xcord;//used by the mouseListener
    private static int ycord;
-   private static Board player1;
-   private static Board player2;
+   private static int[][] player1;
+   private static int[][] player2;
    private static int[] shipLengths;
    private int currentLength;
    private int lengthIndex;
@@ -52,8 +52,16 @@ public class gameTest extends Applet implements MouseListener
           
       //adds mouse listener
       addMouseListener(this);
-      player1 = new Board();
-      player2 = new Board();
+      player1 = new int[10][10];
+      player2 = new int[10][10];
+      for(int r = 0; r < 10; r++)
+      {
+         for(int c = 0; c < 10; c++)
+         {
+            player1[r][c] = 0;
+            player2[r][c] = 0;
+         }
+      }
       //does backbuffering
       backbuffer = createImage(500, 600);
       backg = backbuffer.getGraphics();
@@ -143,7 +151,14 @@ public class gameTest extends Applet implements MouseListener
             }
             if(xend != -1)
             { 
-               player1.makeShip(currentLength, xstart, ystart, xend, yend);
+               for(int r = xstart; r <= xend; r++)
+               {
+                  for(int c = ystart; c <= yend; c++)
+                  {
+                     player1[r][c] = 1;
+                  
+                  }
+               }
                backg.setColor(Color.gray);
                backg.fillRect(25*(xend+2)-25, 25*(yend+2) +275, 25, 25);
                if(xend == xstart)
@@ -257,8 +272,16 @@ public class gameTest extends Applet implements MouseListener
                }
                if(xend != -1)
                {
-                  System.out.println(" " + xstart + " " + ystart); 
-                  player2.makeShip(currentLength, xstart, ystart, xend, yend);
+                   
+                  for(int r = xstart; r <= xend; r++)
+                  {
+                     for(int c = ystart; c <= yend; c++)
+                     {
+                        player2[r][c] = 1;
+                     
+                     }
+                  }
+                  
                   backg.setColor(Color.gray);
                   backg.fillRect(25*(xend+2)-25, 25*(yend+2) +275, 25, 25);
                   if(xend == xstart)
@@ -327,12 +350,13 @@ public class gameTest extends Applet implements MouseListener
       }
       else
       {
+         /*
          System.out.println("Player 1");
          for(int r = 1; r < 11; r++)
          {
             for(int c = 1; c < 11; c++)
             {
-               System.out.print(player1.board[c-1][r-1].val);
+               System.out.print(player1[c-1][r-1]);
             }
             System.out.println();
          }
@@ -341,27 +365,28 @@ public class gameTest extends Applet implements MouseListener
          {
             for(int c = 1; c < 11; c++)
             {
-               System.out.print(player2.board[c-1][r-1].val);
+               System.out.print(player2[c-1][r-1]);
             }
             System.out.println();
          }
+         */
          backg.setColor(Color.lightGray);
          backg.fillRect(0,0,500,600);
          for(int r = 1; r < 11; r++)
          {
             for(int c = 1; c < 11; c++)
             {
-               if(player1.board[r-1][c-1].val == 0)
+               if(player1[r-1][c-1] == 0)
                {
                   backg.setColor(Color.cyan);
                   backg.fillRect(r * 25, c * 25 + 300, 25, 25);
                }
-               else if(player1.board[r-1][c-1].val == 2)
+               else if(player1[r-1][c-1] == 2)
                {
                   backg.setColor(Color.white);
                   backg.fillRect(r * 25, c * 25 + 300, 25, 25);
                }
-               else if(player1.board[r-1][c-1].val == 3)
+               else if(player1[r-1][c-1] == 3)
                {
                   backg.setColor(Color.red);
                   backg.fillRect(r * 25, c * 25 + 300, 25, 25);
@@ -372,22 +397,24 @@ public class gameTest extends Applet implements MouseListener
          {
             for(int c = 1; c < 11; c++)
             {
-               if(player2.board[r-1][c-1].val == 0)
+               if(player2[r-1][c-1] == 0 || player2[r-1][c-1] == 1)
                {
                   backg.setColor(Color.cyan);
                   backg.fillRect(r * 25, c * 25, 25, 25);
                }
-               if(player2.board[r-1][c-1].val == 1)
+               /*
+               if(player2[r-1][c-1] == 1)
                {
                   backg.setColor(Color.black);
                   backg.fillRect(r*25, c*25, 25, 25);
                }
-               else if(player2.board[r-1][c-1].val == 2)
+               */
+               else if(player2[r-1][c-1] == 2)
                {
                   backg.setColor(Color.white);
                   backg.fillRect(r * 25, c * 25, 25, 25);
                }
-               else if(player2.board[r-1][c-1].val == 3)
+               else if(player2[r-1][c-1] == 3)
                {
                   backg.setColor(Color.red);
                   backg.fillRect(r * 25, c * 25, 25, 25);
@@ -437,17 +464,17 @@ public class gameTest extends Applet implements MouseListener
          {
             for(int c = 1; c < 11; c++)
             {
-               if(player2.board[r-1][c-1].val == 0)
+               if(player2[r-1][c-1] == 0)
                {
                   backg.setColor(Color.cyan);
                   backg.fillRect(r * 25, c * 25 + 300, 25, 25);
                }
-               else if(player2.board[r-1][c-1].val == 2)
+               else if(player2[r-1][c-1] == 2)
                {
                   backg.setColor(Color.white);
                   backg.fillRect(r * 25, c * 25 + 300, 25, 25);
                }
-               else if(player2.board[r-1][c-1].val == 3)
+               else if(player2[r-1][c-1] == 3)
                {
                   backg.setColor(Color.red);
                   backg.fillRect(r * 25, c * 25 + 300, 25, 25);
@@ -458,22 +485,24 @@ public class gameTest extends Applet implements MouseListener
          {
             for(int c = 1; c < 11; c++)
             {
-               if(player1.board[r-1][c-1].val == 0)
+               if(player1[r-1][c-1] == 0 || player1[r-1][c-1] == 1)
                {
                   backg.setColor(Color.cyan);
                   backg.fillRect(r * 25, c * 25, 25, 25);
                }
-               if(player1.board[r-1][c-1].val == 1)
+               /*
+               if(player1[r-1][c-1] == 1)
                {
                   backg.setColor(Color.black);
                   backg.fillRect(r*25, c*25, 25, 25);
                }
-               else if(player1.board[r-1][c-1].val == 2)
+               */
+               else if(player1[r-1][c-1] == 2)
                {
                   backg.setColor(Color.white);
                   backg.fillRect(r * 25, c * 25, 25, 25);
                }
-               else if(player1.board[r-1][c-1].val == 3)
+               else if(player1[r-1][c-1] == 3)
                {
                   backg.setColor(Color.red);
                   backg.fillRect(r * 25, c * 25, 25, 25);
@@ -549,22 +578,22 @@ public class gameTest extends Applet implements MouseListener
    }
    public void guessPlayer1(int x, int y)
    {
-      if(player2.board[x-1][y-1].getVal() == 1)
+      if(player2[x-1][y-1] == 1)
       {
-         player2.board[x-1][y-1].guessed();
+         player2[x-1][y-1] = 3;
          turnOver = true;
       }
-      else if(player2.board[x-1][y-1].getVal() == 0)
+      else if(player2[x-1][y-1] == 0)
       {
-         player2.board[x-1][y-1].guessed();
+         player2[x-1][y-1] = 2;
          turnOver = true;
       }
-      else if(player2.board[x-1][y-1].getVal() == 2)
+      else if(player2[x-1][y-1] == 2)
       {
          backg.setColor(Color.black);
          backg.drawString("Already guessed",305, 370);
       }
-      else if(player2.board[x-1][y-1].getVal() == 3)
+      else if(player2[x-1][y-1] == 3)
       {
          backg.setColor(Color.black);
          backg.drawString("Already guessed",305, 370);
@@ -573,22 +602,22 @@ public class gameTest extends Applet implements MouseListener
    }
    public void guessPlayer2(int x, int y)
    {
-      if(player1.board[x-1][y-1].getVal() == 1)
+      if(player1[x-1][y-1] == 1)
       {
-         player1.board[x-1][y-1].guessed();
+         player1[x-1][y-1] = 3;
          turnOver = true;
       }
-      else if(player1.board[x-1][y-1].getVal() == 0)
+      else if(player1[x-1][y-1] == 0)
       {
-         player1.board[x-1][y-1].guessed();
+         player1[x-1][y-1] = 2;
          turnOver = true;
       }
-      else if(player1.board[x-1][y-1].getVal() == 2)
+      else if(player1[x-1][y-1] == 2)
       {
          backg.setColor(Color.black);
          backg.drawString("Already guessed",305, 370);
       }
-      else if(player1.board[x-1][y-1].getVal() == 3)
+      else if(player1[x-1][y-1] == 3)
       {
          backg.setColor(Color.black);
          backg.drawString("Already guessed",305, 370);
@@ -644,7 +673,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player1.board[xstart][ystart+i].isShip())
+                           if(player1[xstart][ystart+i]== 1)
                               check = false;
                         }
                      }
@@ -652,7 +681,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player1.board[xstart][ystart-i].isShip())
+                           if(player1[xstart][ystart-i] == 1)
                               check = false;
                         }
                      }
@@ -663,7 +692,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player1.board[xstart+i][ystart].isShip())
+                           if(player1[xstart+i][ystart] == 1)
                               check = false;
                         }
                      }
@@ -671,7 +700,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player1.board[xstart-i][ystart].isShip())
+                           if(player1[xstart-i][ystart] == 1)
                               check = false;
                         }
                      }
@@ -715,7 +744,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player2.board[xstart][ystart+i].isShip())
+                           if(player2[xstart][ystart+i] == 1)
                               check = false;
                         }
                      }
@@ -723,7 +752,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player2.board[xstart][ystart-i].isShip())
+                           if(player2[xstart][ystart-i] == 1)
                               check = false;
                         }
                      }
@@ -734,7 +763,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player2.board[xstart+i][ystart].isShip())
+                           if(player2[xstart+i][ystart] == 1)
                               check = false;
                         }
                      }
@@ -742,7 +771,7 @@ public class gameTest extends Applet implements MouseListener
                      {
                         for(int i = 0; i < currentLength; i++)
                         {
-                           if(player2.board[xstart-i][ystart].isShip())
+                           if(player2[xstart-i][ystart] == 1)
                               check = false;
                         }
                      }
@@ -766,7 +795,7 @@ public class gameTest extends Applet implements MouseListener
          
          xcord = (int)(x+25)/25;
          ycord = (int)(y+25)/25;
-         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12 && turnOver != true)
             guessPlayer1(xcord -1, ycord -1);
          if(turnOver == true && x > 305 && x < 495 && y > 360 && y < 460)
          {
@@ -778,7 +807,7 @@ public class gameTest extends Applet implements MouseListener
       {
          xcord = (int)(x+25)/25;
          ycord = (int)(y+25)/25;
-         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12)
+         if(xcord > 1 && xcord < 12 && ycord > 1 && ycord < 12 && turnOver != true)
             guessPlayer2(xcord -1, ycord -1);
          if(turnOver == true && x > 305 && x < 495 && y > 360 && y < 460)
          {
