@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class spot{
-   private int val;
+   public int val;
    
    public spot()
    {
@@ -33,5 +33,9 @@ public class spot{
       if(val == 2 || val == 3)
          return true;
       return false;
+   }
+   public int getVal()
+   {
+      return val;
    }
 }
