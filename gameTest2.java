@@ -83,6 +83,10 @@ public class gameTest2 extends Applet implements MouseListener
          player2Screen();
       else if(screen.equals("transition"))
          transition();
+      else if(screen.equals("winPlayer1"))
+         winPlayer1();
+      else if(screen.equals("winPlayer2"))
+         winPlayer2();
 
       
       g.drawImage(backbuffer, 0,0, this); //only g
@@ -623,6 +627,45 @@ public class gameTest2 extends Applet implements MouseListener
          backg.drawString("Already guessed",305, 370);
       }
       repaint(); 
+   }
+   public void checkWin()
+   {
+      boolean player1Win = true;
+      boolean player2Win = true;
+      for(int r = 0; r < 10; r++)
+      {
+         for(int c = 0; c < 10; c++)
+         {
+            if(player1[r][c] == 1)
+            {
+               player2Win = false;
+            }
+            if(player2[r][c] == 1)
+            {
+               player1Win = false;
+            }
+         }
+      }
+      if(player1Win)
+         winPlayer1();
+      if(player2Win)
+         winPlayer2();
+   }
+   public void winPlayer1()
+   {
+      screen = "winPlayer1";
+      backg.setColor(Color.lightGray);
+      backg.fillRect(0,0,500,600);
+      backg.setColor(Color.black);
+      backg.drawString("U win",240,30);
+   }
+   public void winPlayer2()
+   {
+      screen = "winPlayer2";
+      backg.setColor(Color.lightGray);
+      backg.fillRect(0,0,500,600);
+      backg.setColor(Color.black);
+      backg.drawString("U win",240,30);
    }
    
    public void mouseClicked(MouseEvent e)
