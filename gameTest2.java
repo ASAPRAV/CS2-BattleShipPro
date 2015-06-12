@@ -25,8 +25,7 @@ public class gameTest2 extends Applet implements MouseListener
    private boolean setupDone;
    private boolean turnOver;
    private boolean transitions;
-   Image img;
-   MediaTracker tr;
+   
    
    public void init()
    {
@@ -51,8 +50,6 @@ public class gameTest2 extends Applet implements MouseListener
       setupDone = false;
       turnOver = false;
       transitions = false;
-      tr = new MediaTracker(this);
-      img = getImage(getCodeBase(), "newWaterTile25X25.jpg");
           
       //adds mouse listener
       addMouseListener(this);
@@ -386,8 +383,8 @@ public class gameTest2 extends Applet implements MouseListener
             {
                if(player1[r-1][c-1] == 0)
                {
-                  tr.addImage(img,0);
-                  backg.drawImage(img,r * 25, c * 25 + 300, this);
+                  backg.setColor(Color.cyan);
+                  backg.fillRect(r * 25, c * 25 + 300, 25, 25);
                }
                else if(player1[r-1][c-1] == 2)
                {
